@@ -978,6 +978,7 @@ h6,
 .logo-main{
     width: 78px;
     height: auto;
+    border: none;
 }
 .btn.btn-link:hover {
     color: rgb(164, 164, 164) !important;

@@ -172,25 +172,22 @@
         <div class="p-4 rounded d-flex flex-column justify-content-between w-100" style="background: #f5f5ff;">
           <div> 
             <h4 class="mb-4 text-center" style="color: #8b5b39;">Get in Touch</h4>
-           <form action="https://api.web3forms.com/submit" method="POST" class="flex-grow-1 d-flex flex-column justify-content-between h-100">
-            <!-- Web3Forms Access Key -->
-            <input type="hidden" name="access_key" value="f538dd3e-092b-46d9-b125-dadece37fc56">
-
+           <form id="contactForm" class="flex-grow-1 d-flex flex-column justify-content-between h-100">
             <div class="mb-3">
-              <input type="text" class="form-control" name="company" placeholder="Company Name" required>
+              <input type="text" class="form-control" id="company" name="company" placeholder="Company Name" required>
             </div>
             <div class="mb-3">
-              <input type="text" class="form-control" name="phone" placeholder="Mobile Number" required>
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Mobile Number" required>
             </div>
             <div class="mb-3">
-              <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
             </div>
             <div class="mb-3">
-              <textarea class="form-control" name="message" rows="4" placeholder="Message" required></textarea>
+              <textarea class="form-control" id="message" name="message" rows="4" placeholder="Message" required></textarea>
             </div>
             <div class="text-center mt-3">
               <button class="btn text-white px-4 py-2 w-100 btn-maroon" type="submit" style="background-color: #8b5b39; border: none;">
-                Send Message
+                Send
               </button>
             </div>
           </form>
@@ -279,6 +276,35 @@ Gokhivare Road, Opp Pevasai Palghar, Vasai, Dist-Palghar, Maharashtra – 401208
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
+    <!-- WhatsApp Form Handler -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const company = document.getElementById('company').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `*New Contact Form Submission*%0A%0A` +
+                `*Company:* ${encodeURIComponent(company)}%0A` +
+                `*Phone:* ${encodeURIComponent(phone)}%0A` +
+                `*Email:* ${encodeURIComponent(email)}%0A` +
+                `*Message:* ${encodeURIComponent(message)}`;
+            
+            // WhatsApp number (without + or spaces)
+            const whatsappNumber = '918003801338';
+            
+            // Open WhatsApp with the message
+            window.open(`https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${whatsappMessage}`, '_blank');
+            
+            // Optional: Reset form after submission
+            this.reset();
+        });
+    </script>
 </body>
 
 </html>
